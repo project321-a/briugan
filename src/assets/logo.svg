@@ -1,0 +1,7 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="60" fill="transparent"/>
+  <path d="M20 15H45V45H20V15Z" fill="#d4af37" />
+  <path d="M25 20H40V40H25V20Z" fill="#0a1128" />
+  <text x="55" y="42" fill="#0a1128" font-family="Playfair Display, serif" font-weight="bold" font-size="32">bruigan</text>
+  <circle cx="32.5" cy="30" r="3" fill="#d4af37" />
+</svg>
