@@ -1,32 +1,38 @@
-# React + TypeScript + Vite
+# Bruigan Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A unified Pan-African trade and investment infrastructure merging market intelligence, deal capture, and high-level connectivity.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Bruigan is an exquisite, executive-grade platform that synthesizes the core value propositions of three leading industry players into a single, seamless ecosystem:
 
-## React Compiler
+1.  **Market Intelligence**: Bespoke on-the-ground research for African market entry.
+2.  **Deal Infrastructure**: Verified, capture-ready investment opportunities through "The Deal Room".
+3.  **Trade Connectivity**: Direct-to-buyer outreach and strategic networking across the continent.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Core Features
 
-## Expanding the Oxlint configuration
+- **The Deal Room**: A curated pipeline of verified, structured investment opportunities.
+- **Service Pillars**: Structured support for Market Intelligence, Deal Structuring, and On-the-ground representation.
+- **Executive UI**: A sophisticated design language utilizing Navy, Gold, and Cream tones with dynamic interactions.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Tech Stack
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+- **Framework**: React 19 + Vite 6
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Type Safety**: TypeScript
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
