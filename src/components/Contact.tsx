@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const Contact: React.FC = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In a real app, you'd send data to an API here
+    // Redirect to portal with company name to customize experience
+    const companyParam = encodeURIComponent(formData.company || 'New Partner');
+    navigate(`/portal?company=${companyParam}`);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
   return (
     <section id="contact" className="py-24 bg-brand-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,26 +76,58 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="bg-white p-10 rounded-3xl shadow-xl shadow-brand-navy/5 border border-gray-100"
           >
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-bold text-brand-navy mb-2">Full Name</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none" placeholder="John Doe" />
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none"
+                    placeholder="John Doe"
+                    required
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-brand-navy mb-2">Email Address</label>
-                  <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none" placeholder="john@company.com" />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none"
+                    placeholder="john@company.com"
+                    required
+                  />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-bold text-brand-navy mb-2">Company</label>
-                <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none" placeholder="Acme Corp" />
+                <input
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none"
+                  placeholder="Acme Corp"
+                  required
+                />
               </div>
               <div>
                 <label className="block text-sm font-bold text-brand-navy mb-2">Your Product / Inquiry</label>
-                <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none" placeholder="Describe your product and target market..."></textarea>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none"
+                  placeholder="Describe your product and target market..."
+                  required
+                ></textarea>
               </div>
-              <button type="button" className="w-full btn-primary flex items-center justify-center gap-2 py-4">
+              <button type="submit" className="w-full btn-primary flex items-center justify-center gap-2 py-4">
                 Send Inquiry <Send size={18} />
               </button>
             </form>
