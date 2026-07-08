@@ -1,52 +1,71 @@
 import React from 'react';
-import logo from '../assets/logo.svg';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-brand-navy text-white pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div className="col-span-1 md:col-span-1">
-            <img src={logo} alt="bruigan logo" className="h-10 w-auto mb-6 brightness-0 invert" />
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Leading Pan-African market entry and deal execution infrastructure.
-              Connecting global ambition with local opportunity.
+    <footer className="bg-[#070f1e] py-[56px] px-7">
+      <div className="max-w-[1180px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 mb-12">
+          <div className="footer-brand">
+            <div className="font-display text-[22px] text-brand-gold tracking-[2px] font-bold mb-3 flex items-center">
+              BRIUGAN
+            </div>
+            <p className="text-[12px] leading-[1.75] text-white/35 max-w-[240px] mb-[18px]">
+              Business growth, market access, and strategic partnership advisory for companies expanding across East and Central Africa.
             </p>
+            <div className="flex flex-col gap-[7px]">
+              <div className="flex items-center gap-2 text-[11px] text-white/40">
+                <i className="ti ti-mail text-[14px] text-brand-gold"></i>
+                <span>info@briugan.com</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] text-white/40">
+                <i className="ti ti-phone text-[14px] text-brand-gold"></i>
+                <span>+254 7XX XXX XXX</span>
+              </div>
+              <div className="flex items-center gap-2 text-[11px] text-white/40">
+                <i className="ti ti-map-pin text-[14px] text-brand-gold"></i>
+                <span>Nairobi, Kenya</span>
+              </div>
+            </div>
           </div>
 
           <div>
-            <h4 className="text-brand-gold font-bold mb-6 text-lg">Services</h4>
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">Market Intelligence</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Deal Structuring</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Market Outreach</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Strategic Advisory</a></li>
+            <div className="text-[11px] font-extrabold text-white/50 uppercase tracking-[1.2px] mb-4">Services</div>
+            <ul className="space-y-[9px] p-0 list-none">
+              {['Business Development', 'Market Expansion', 'Export Facilitation', 'Trade Finance Access', 'Compliance & Regulatory', 'AI Partner Matching'].map(s => (
+                <li key={s}>
+                  <a href="#services" className="text-[12px] text-white/40 no-underline transition-colors hover:text-brand-gold">{s}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-brand-gold font-bold mb-6 text-lg">Company</h4>
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Process</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Case Studies</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+            <div className="text-[11px] font-extrabold text-white/50 uppercase tracking-[1.2px] mb-4">Platform</div>
+            <ul className="space-y-[9px] p-0 list-none">
+              {['Trade Dashboard', 'Deal Room', 'Partner Marketplace', 'Export Hub', 'Proposal Generator', 'Sign In'].map(s => (
+                <li key={s}>
+                  <a href="/connect" className="text-[12px] text-white/40 no-underline transition-colors hover:text-brand-gold">{s}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-brand-gold font-bold mb-6 text-lg">Connect</h4>
-            <p className="text-gray-400 text-sm mb-4">Nairobi Office: Karen, Nairobi, Kenya</p>
-            <p className="text-gray-400 text-sm mb-4">Email: agui@bruigan.com</p>
-            <p className="text-gray-400 text-sm">+254 714 112 066</p>
+            <div className="text-[11px] font-extrabold text-white/50 uppercase tracking-[1.2px] mb-4">Markets</div>
+            <ul className="space-y-[9px] p-0 list-none">
+              {['🇰🇪 Kenya', '🇺🇬 Uganda', '🇹🇿 Tanzania', '🇷🇼 Rwanda', '🇪🇹 Ethiopia', '🇨🇩 DRC'].map(s => (
+                <li key={s}>
+                  <a href="#" className="text-[12px] text-white/40 no-underline transition-colors hover:text-brand-gold">{s}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs">
-          <p>© 2026 bruigan. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white">Privacy Policy</a>
-            <a href="#" className="hover:text-white">Terms of Service</a>
+        <div className="border-t border-white/7 pt-6 flex justify-between items-center flex-wrap gap-3">
+          <div className="text-[11px] text-white/20">© 2026 Briugan Consulting. All rights reserved. Nairobi, Kenya.</div>
+          <div className="inline-flex items-center gap-1.5 bg-brand-gold/10 border border-brand-gold/20 rounded-full px-3 py-1 text-[10px] text-brand-gold font-semibold">
+            <i className="ti ti-shield-check text-[13px]"></i> Secure Trade Platform
           </div>
         </div>
       </div>
