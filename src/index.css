@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,24 +6,68 @@
 
 :root {
   scroll-behavior: smooth;
+  --n: #0B1D3A;
+  --n2: #0e2347;
+  --n3: #162d52;
+  --g: #D4AF37;
+  --g2: #b8952c;
+  --cr: #FBF9F5;
+  --cr2: #EDE8DE;
+  --tx: #1A1A2E;
+  --mu: #6B7280;
+  --li: #9CA3AF;
+  --wh: #fff;
+  --bd: #E5E7EB;
+  --bd2: #D1D5DB;
+  --ok: #10B981;
+  --wn: #F59E0B;
+  --er: #EF4444;
+  --inf: #3B82F6;
 }
 
 body {
-  @apply bg-brand-cream text-brand-navy font-sans antialiased;
+  @apply bg-white text-brand-charcoal font-sans antialiased;
+}
+
+h1, h2, h3, h4, .font-playfair {
+  @apply font-display;
 }
 
 .glass {
-  @apply bg-white/70 backdrop-blur-md border border-white/20;
+  @apply bg-brand-navy/95 backdrop-blur-md border-b border-white/10;
 }
 
 .btn-primary {
-  @apply bg-brand-navy text-white px-6 py-3 rounded-md font-medium transition-all hover:bg-brand-navy/90 hover:shadow-lg active:scale-95;
+  @apply bg-brand-gold text-brand-navy px-6 py-3 rounded-md font-bold transition-all hover:bg-brand-gold2 hover:shadow-lg active:scale-95;
 }
 
 .btn-outline {
-  @apply border-2 border-brand-navy text-brand-navy px-6 py-3 rounded-md font-medium transition-all hover:bg-brand-navy hover:text-white active:scale-95;
+  @apply border-2 border-white/25 text-white px-6 py-3 rounded-md font-bold transition-all hover:border-brand-gold hover:text-brand-gold active:scale-95;
 }
 
-h1, h2, h3, h4 {
-  @apply font-display;
+/* Custom Utilities from HTML */
+.hero-grid {
+  background-image: linear-gradient(rgba(212,175,55,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.04) 1px,transparent 1px);
+  background-size: 56px 56px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 3s ease-in-out infinite 1.5s;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-custom {
+  animation: spin .6s linear infinite;
 }

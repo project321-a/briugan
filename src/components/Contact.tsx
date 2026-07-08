@@ -1,49 +1,40 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Send, CheckCircle, Clock, Briefcase, Sparkles } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-24 bg-brand-cream">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+    <section id="contact" className="py-24 bg-brand-cream relative">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-16 items-center">
           <div>
-            <h2 className="text-brand-gold font-semibold tracking-widest uppercase text-sm mb-4">Contact Us</h2>
-            <h3 className="text-4xl md:text-5xl font-extrabold text-brand-navy mb-8">Ready to enter Africa?</h3>
-            <p className="text-gray-600 text-lg mb-12 leading-relaxed">
-              Tell us about your product and the market you're targeting. We'll come back
-              with a clear picture of the opportunity, the right entry point, and exactly
-              how bruigan gets you there.
+            <div className="inline-flex items-center gap-2 bg-brand-navy/5 border border-brand-navy/10 rounded-full px-3.5 py-1 mb-5">
+              <div className="w-1.5 h-1.5 rounded-full bg-brand-navy"></div>
+              <span className="text-[9px] font-bold text-brand-navy tracking-[1.5px] uppercase">Get Started</span>
+            </div>
+
+            <h2 className="font-display text-4xl md:text-5xl text-brand-navy font-bold leading-tight mb-6">
+              Ready to scale your <span className="text-brand-gold italic">trade?</span>
+            </h2>
+
+            <p className="text-sm text-gray-500 leading-relaxed mb-10 max-w-sm">
+              Our team of experts will review your company profile and goals. Expect your private deal room and first partner matches within 24 hours.
             </p>
 
-            <div className="space-y-8">
-              <div className="flex items-start gap-6">
-                <div className="p-4 rounded-xl bg-white shadow-sm text-brand-gold">
-                  <Mail size={24} />
+            <div className="space-y-6">
+              {[
+                { icon: <CheckCircle className="text-emerald-500" size={20} />, text: 'Profile review & verification' },
+                { icon: <Briefcase className="text-brand-gold" size={20} />, text: 'Private deal room setup' },
+                { icon: <Sparkles className="text-blue-500" size={20} />, text: 'AI partner matching engine' },
+                { icon: <Clock className="text-brand-navy/30" size={20} />, text: '24-hour turnaround' }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white border border-gray-100 flex items-center justify-center shadow-sm">
+                    {item.icon}
+                  </div>
+                  <span className="text-sm font-semibold text-brand-navy/80">{item.text}</span>
                 </div>
-                <div>
-                  <h4 className="text-brand-navy font-bold text-lg mb-1">Email</h4>
-                  <p className="text-gray-500">agui@bruigan.com</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-6">
-                <div className="p-4 rounded-xl bg-white shadow-sm text-brand-gold">
-                  <Phone size={24} />
-                </div>
-                <div>
-                  <h4 className="text-brand-navy font-bold text-lg mb-1">Phone</h4>
-                  <p className="text-gray-500">+254 714 112 066</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-6">
-                <div className="p-4 rounded-xl bg-white shadow-sm text-brand-gold">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <h4 className="text-brand-navy font-bold text-lg mb-1">Based In</h4>
-                  <p className="text-gray-500">Nairobi, Kenya — Africa market access</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -51,30 +42,66 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white p-10 rounded-3xl shadow-xl shadow-brand-navy/5 border border-gray-100"
+            className="bg-white border border-gray-100 rounded-2xl p-8 md:p-12 shadow-xl"
           >
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-bold text-brand-navy mb-2">Full Name</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none" placeholder="John Doe" />
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Company Name</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. New Italycor Ltd."
+                    className="w-full bg-gray-50 border border-gray-100 rounded-lg px-4 py-3 text-sm focus:bg-white focus:border-brand-gold outline-none transition-all"
+                  />
                 </div>
-                <div>
-                  <label className="block text-sm font-bold text-brand-navy mb-2">Email Address</label>
-                  <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none" placeholder="john@company.com" />
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Market of Interest</label>
+                  <select className="w-full bg-gray-50 border border-gray-100 rounded-lg px-4 py-3 text-sm focus:bg-white focus:border-brand-gold outline-none transition-all appearance-none cursor-pointer">
+                    <option>Kenya</option>
+                    <option>Uganda</option>
+                    <option>Tanzania</option>
+                    <option>Rwanda</option>
+                    <option>Ethiopia</option>
+                    <option>Regional Expansion</option>
+                  </select>
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-bold text-brand-navy mb-2">Company</label>
-                <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none" placeholder="Acme Corp" />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Contact Name</label>
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    className="w-full bg-gray-50 border border-gray-100 rounded-lg px-4 py-3 text-sm focus:bg-white focus:border-brand-gold outline-none transition-all"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Business Email</label>
+                  <input
+                    type="email"
+                    placeholder="you@company.com"
+                    className="w-full bg-gray-50 border border-gray-100 rounded-lg px-4 py-3 text-sm focus:bg-white focus:border-brand-gold outline-none transition-all"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-bold text-brand-navy mb-2">Your Product / Inquiry</label>
-                <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-0 transition-colors outline-none" placeholder="Describe your product and target market..."></textarea>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Briefly describe your goals</label>
+                <textarea
+                  rows={4}
+                  placeholder="What are you looking to achieve?"
+                  className="w-full bg-gray-50 border border-gray-100 rounded-lg px-4 py-3 text-sm focus:bg-white focus:border-brand-gold outline-none transition-all resize-none"
+                ></textarea>
               </div>
-              <button type="button" className="w-full btn-primary flex items-center justify-center gap-2 py-4">
-                Send Inquiry <Send size={18} />
+
+              <button className="w-full bg-brand-navy text-brand-gold py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all hover:bg-brand-navy2 hover:shadow-lg shadow-brand-navy/10 active:scale-[0.98]">
+                <Send size={18} /> Submit to Briugan
               </button>
+
+              <p className="text-[10px] text-center text-gray-400">
+                By submitting, you agree to our terms and confidential data handling policy.
+              </p>
             </form>
           </motion.div>
         </div>

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import logo from '../assets/logo.svg';
+import { Menu, X, Search, LogIn, UserPlus, LayoutList, Compass, Briefcase, MapPin } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  onJoin?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onJoin }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,66 +20,100 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'Deal Room', href: '#deals' },
-    { name: 'Process', href: '#process' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Feed', href: '#feed-section', icon: <LayoutList size={15} /> },
+    { name: 'Discover', href: '#feed-section', icon: <Compass size={15} /> },
+    { name: 'Opportunities', href: '#feed-section', icon: <Briefcase size={15} /> },
+    { name: 'Countries', href: '#feed-section', icon: <MapPin size={15} /> },
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass py-3 shadow-sm' : 'bg-transparent py-5'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <div className="flex-shrink-0 flex items-center">
-            <img src={logo} alt="bruigan logo" className={`h-10 w-auto ${!isScrolled ? 'brightness-0 invert' : ''}`} />
-          </div>
+    <nav className={`fixed top-0 left-0 right-0 z-[200] transition-all duration-300 h-[60px] flex items-center px-6 gap-0 border-b border-white/10 ${isScrolled ? 'bg-brand-navy/96 backdrop-blur-md' : 'bg-brand-navy/90 backdrop-blur-md'}`}>
+      <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
+        <div className="flex items-center">
+          <a href="/" className="font-display text-lg text-brand-gold tracking-[2px] font-bold mr-8 no-underline">
+            BRIUGAN
+          </a>
 
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`${isScrolled ? 'text-brand-navy' : 'text-white'} hover:text-brand-gold px-3 py-2 text-sm font-medium transition-colors`}
-                >
-                  {link.name}
-                </a>
-              ))}
-              <a href="#contact" className={`btn-primary py-2 text-sm ${!isScrolled ? 'bg-brand-gold text-brand-navy' : ''}`}>
-                Get Started
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-xs font-semibold text-white/55 px-3 py-2 rounded-lg cursor-pointer transition-all hover:text-brand-gold hover:bg-brand-gold/10 flex items-center gap-1.5"
+              >
+                {link.icon}
+                {link.name}
               </a>
-            </div>
+            ))}
           </div>
+        </div>
 
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`${isScrolled ? 'text-brand-navy' : 'text-white'} p-2`}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+        <div className="hidden lg:flex items-center gap-4 ml-auto">
+          <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 w-[220px]">
+            <Search size={13} className="text-white/30 flex-shrink-0" />
+            <input
+              placeholder="What opportunity are you exploring?"
+              className="bg-transparent border-none text-[11px] font-sans text-white w-full outline-none placeholder:text-white/30"
+            />
           </div>
+          <button
+            onClick={() => navigate('/portal')}
+            className="flex items-center gap-1.5 text-xs font-bold text-white bg-transparent border-[1.5px] border-white/25 rounded-lg px-3.5 py-1.5 cursor-pointer transition-all hover:border-brand-gold hover:text-brand-gold"
+          >
+            <LogIn size={13} /> Sign In
+          </button>
+          <button
+            onClick={onJoin}
+            className="flex items-center gap-1.5 text-xs font-extrabold text-brand-navy bg-brand-gold rounded-lg px-4 py-1.5 cursor-pointer transition-all hover:bg-brand-gold2 border-none"
+          >
+            <UserPlus size={12} /> Join Free
+          </button>
+        </div>
+
+        <div className="lg:hidden flex items-center gap-4">
+          <button
+            onClick={() => navigate('/portal')}
+            className="text-white/80 p-1"
+          >
+            <LogIn size={20} />
+          </button>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-white p-1"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden glass absolute top-full left-0 w-full animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="lg:hidden fixed top-[60px] left-0 w-full bg-brand-navy/98 backdrop-blur-xl border-b border-white/10 animate-in fade-in slide-in-from-top-4 duration-300 z-[190]">
+          <div className="px-4 pt-4 pb-6 space-y-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-brand-navy block px-3 py-4 text-base font-medium border-b border-gray-100"
+                className="text-white/70 block px-3 py-4 text-sm font-semibold border-b border-white/5 flex items-center gap-3"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
+                {link.icon}
                 {link.name}
               </a>
             ))}
-            <div className="pt-4 pb-2 px-3">
-              <a href="#contact" className="btn-primary block text-center w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                Get Started
-              </a>
+            <div className="pt-6 flex flex-col gap-3">
+              <button
+                onClick={() => { navigate('/portal'); setIsMobileMenuOpen(false); }}
+                className="flex items-center justify-center gap-2 w-full py-3 bg-white/5 border border-white/20 text-white rounded-lg font-bold"
+              >
+                <LogIn size={16} /> Sign In
+              </button>
+              <button
+                onClick={() => { onJoin?.(); setIsMobileMenuOpen(false); }}
+                className="flex items-center justify-center gap-2 w-full py-3 bg-brand-gold text-brand-navy rounded-lg font-extrabold"
+              >
+                <UserPlus size={16} /> Join Free
+              </button>
             </div>
           </div>
         </div>
