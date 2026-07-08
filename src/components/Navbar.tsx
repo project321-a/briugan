@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import logo from '../assets/logo.svg';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -16,69 +16,45 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Services', href: '#services' },
-    { name: 'Deal Room', href: '#deals' },
-    { name: 'Process', href: '#process' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Platform', href: '#platform' },
+    { name: 'How It Works', href: '#how' },
+    { name: 'Results', href: '#results' },
+    { name: 'Contact', href: 'mailto:info@briugan.com' },
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass py-3 shadow-sm' : 'bg-transparent py-5'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <div className="flex-shrink-0 flex items-center">
-            <img src={logo} alt="bruigan logo" className={`h-10 w-auto ${!isScrolled ? 'brightness-0 invert' : ''}`} />
-          </div>
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${isScrolled ? 'bg-brand-navy/97 backdrop-blur-md shadow-[0_2px_24px_rgba(0,0,0,0.18)]' : 'bg-transparent'} h-[68px] flex items-center`}>
+      <div className="max-w-[1180px] mx-auto px-7 w-full flex items-center gap-6">
+        <Link to="/" className="font-display text-[22px] text-brand-gold tracking-[2px] font-bold no-underline flex-shrink-0">
+          BRIUGAN
+        </Link>
+        <div className="text-[9px] text-white/35 tracking-[2px] uppercase ml-[-4px]">Consulting</div>
 
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`${isScrolled ? 'text-brand-navy' : 'text-white'} hover:text-brand-gold px-3 py-2 text-sm font-medium transition-colors`}
-                >
-                  {link.name}
-                </a>
-              ))}
-              <a href="#contact" className={`btn-primary py-2 text-sm ${!isScrolled ? 'bg-brand-gold text-brand-navy' : ''}`}>
-                Get Started
-              </a>
-            </div>
-          </div>
-
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`${isScrolled ? 'text-brand-navy' : 'text-white'} p-2`}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden glass absolute top-full left-0 w-full animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
+        <div className="ml-auto flex items-center gap-1.5">
+          {isHome && navLinks.map((link) => (
+            link.href.startsWith('#') ? (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-brand-navy block px-3 py-4 text-base font-medium border-b border-gray-100"
-                onClick={() => setIsMobileMenuOpen(false)}
+                className="hidden md:block text-[12px] font-semibold text-white/65 px-3 py-1.5 rounded-lg no-underline transition-all hover:text-brand-gold hover:bg-brand-gold/10"
               >
                 {link.name}
               </a>
-            ))}
-            <div className="pt-4 pb-2 px-3">
-              <a href="#contact" className="btn-primary block text-center w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                Get Started
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="hidden md:block text-[12px] font-semibold text-white/65 px-3 py-1.5 rounded-lg no-underline transition-all hover:text-brand-gold hover:bg-brand-gold/10"
+              >
+                {link.name}
               </a>
-            </div>
-          </div>
+            )
+          ))}
+          <Link to="/connect" className="bg-brand-gold text-brand-navy text-[12px] font-extrabold px-5 py-2.5 rounded-[9px] no-underline transition-all hover:bg-brand-gold2 hover:-translate-y-0.5 ml-1 flex items-center gap-2">
+            <i className="ti ti-login text-[13px]"></i> Sign In
+          </Link>
         </div>
-      )}
+      </div>
     </nav>
   );
 };
