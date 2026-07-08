@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Search, LogIn, UserPlus, LayoutList, Compass, Briefcase, MapPin } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Menu, X, Search, LogIn, UserPlus, LayoutList, Briefcase, Zap, Phone } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface NavbarProps {
   onJoin?: () => void;
@@ -10,6 +10,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onJoin }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,30 +21,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onJoin }) => {
   }, []);
 
   const navLinks = [
-    { name: 'Feed', href: '#feed-section', icon: <LayoutList size={15} /> },
-    { name: 'Discover', href: '#feed-section', icon: <Compass size={15} /> },
-    { name: 'Opportunities', href: '#feed-section', icon: <Briefcase size={15} /> },
-    { name: 'Countries', href: '#feed-section', icon: <MapPin size={15} /> },
+    { name: 'Feed', path: '/feed', icon: <LayoutList size={15} /> },
+    { name: 'Deals', path: '/deals', icon: <Briefcase size={15} /> },
+    { name: 'Services', path: '/services', icon: <Zap size={15} /> },
+    { name: 'Contact', path: '/contact', icon: <Phone size={15} /> },
   ];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[200] transition-all duration-300 h-[60px] flex items-center px-6 gap-0 border-b border-white/10 ${isScrolled ? 'bg-brand-navy/96 backdrop-blur-md' : 'bg-brand-navy/90 backdrop-blur-md'}`}>
       <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
         <div className="flex items-center">
-          <a href="/" className="font-display text-lg text-brand-gold tracking-[2px] font-bold mr-8 no-underline">
+          <div onClick={() => navigate('/')} className="font-display text-lg text-brand-gold tracking-[2px] font-bold mr-8 no-underline cursor-pointer">
             BRIUGAN
-          </a>
+          </div>
 
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <a
+              <div
                 key={link.name}
-                href={link.href}
-                className="text-xs font-semibold text-white/55 px-3 py-2 rounded-lg cursor-pointer transition-all hover:text-brand-gold hover:bg-brand-gold/10 flex items-center gap-1.5"
+                onClick={() => navigate(link.path)}
+                className={`text-xs font-semibold px-3 py-2 rounded-lg cursor-pointer transition-all flex items-center gap-1.5 ${location.pathname === link.path ? 'text-brand-gold bg-brand-gold/10' : 'text-white/55 hover:text-brand-gold hover:bg-brand-gold/10'}`}
               >
                 {link.icon}
                 {link.name}
-              </a>
+              </div>
             ))}
           </div>
         </div>
@@ -52,7 +53,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onJoin }) => {
           <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 w-[220px]">
             <Search size={13} className="text-white/30 flex-shrink-0" />
             <input
-              placeholder="What opportunity are you exploring?"
+              placeholder="Search the network..."
               className="bg-transparent border-none text-[11px] font-sans text-white w-full outline-none placeholder:text-white/30"
             />
           </div>
@@ -91,15 +92,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onJoin }) => {
         <div className="lg:hidden fixed top-[60px] left-0 w-full bg-brand-navy/98 backdrop-blur-xl border-b border-white/10 animate-in fade-in slide-in-from-top-4 duration-300 z-[190]">
           <div className="px-4 pt-4 pb-6 space-y-2">
             {navLinks.map((link) => (
-              <a
+              <div
                 key={link.name}
-                href={link.href}
-                className="text-white/70 block px-3 py-4 text-sm font-semibold border-b border-white/5 flex items-center gap-3"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => { navigate(link.path); setIsMobileMenuOpen(false); }}
+                className={`block px-3 py-4 text-sm font-semibold border-b border-white/5 flex items-center gap-3 cursor-pointer ${location.pathname === link.path ? 'text-brand-gold' : 'text-white/70'}`}
               >
                 {link.icon}
                 {link.name}
-              </a>
+              </div>
             ))}
             <div className="pt-6 flex flex-col gap-3">
               <button

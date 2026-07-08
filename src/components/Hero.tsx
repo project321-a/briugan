@@ -1,14 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Rocket, Eye, CheckCircle, Lock, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface HeroProps {
   onJoin?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onJoin }) => {
+  const navigate = useNavigate();
+
   return (
-    <section className="relative min-h-screen flex items-center pt-[60px] overflow-hidden bg-brand-navy">
+    <section className="relative min-h-[90vh] flex items-center pt-[60px] overflow-hidden bg-brand-navy">
       {/* Grid Pattern */}
       <div className="absolute inset-0 hero-grid pointer-events-none opacity-100"></div>
 
@@ -44,7 +47,10 @@ export const Hero: React.FC<HeroProps> = ({ onJoin }) => {
               >
                 <Rocket size={14} /> Join the Network
               </button>
-              <button className="flex items-center gap-2 text-xs font-extrabold px-6 py-3.5 bg-transparent text-white/80 border-[1.5px] border-white/20 rounded-lg cursor-pointer transition-all hover:border-brand-gold hover:text-brand-gold">
+              <button
+                onClick={() => navigate('/feed')}
+                className="flex items-center gap-2 text-xs font-extrabold px-6 py-3.5 bg-transparent text-white/80 border-[1.5px] border-white/20 rounded-lg cursor-pointer transition-all hover:border-brand-gold hover:text-brand-gold"
+              >
                 <Eye size={14} /> Browse Opportunities
               </button>
             </div>
@@ -66,7 +72,7 @@ export const Hero: React.FC<HeroProps> = ({ onJoin }) => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative"
+            className="relative hidden lg:block"
           >
             {/* Floating Cards */}
             <div className="absolute top-[-16px] right-[-20px] bg-brand-navy/92 border border-brand-gold/22 rounded-xl p-3 px-4 z-20 animate-float shadow-2xl">
