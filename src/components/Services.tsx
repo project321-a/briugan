@@ -1,62 +1,71 @@
 import React from 'react';
+import { Ship, Building, Target, Zap, Layout, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Search, Shield, Globe, Users } from 'lucide-react';
 
 const services = [
   {
-    title: 'Market Intelligence',
-    description: 'Bespoke research identifying the top local buyers, distributors, and enterprise partners for your specific product category.',
-    icon: Search,
-    color: 'bg-brand-gold/10 text-brand-gold'
+    icon: <Globe className="text-brand-gold" size={28} />,
+    title: "Market Infrastructure",
+    description: "Direct access to verified buyers, distributors, and HORECA networks across 6 regional markets."
   },
   {
-    title: 'Deal Infrastructure',
-    description: 'Structured execution for verified deals. We manage the capture-to-completion pipeline, including verification and escrow.',
-    icon: Shield,
-    color: 'bg-brand-gold/10 text-brand-gold'
+    icon: <Target className="text-brand-gold" size={28} />,
+    title: "Deal Structuring",
+    description: "We don't just connect; we architect. We structure commercial agreements to ensure legal and financial safety."
   },
   {
-    title: 'On-the-ground Outreach',
-    description: 'We represent you in-person, navigating local procurement and cultural nuances to close agreements without you leaving home.',
-    icon: Globe,
-    color: 'bg-brand-gold/10 text-brand-gold'
+    icon: <Layout className="text-brand-gold" size={28} />,
+    title: "The Deal Room",
+    description: "A private, secure workspace for every partnership—centralizing documentation, communication, and pipeline."
   },
   {
-    title: 'Strategic Networking',
-    description: 'Access the most anticipated African industry meet-ups and connect with prominent business leaders across the continent.',
-    icon: Users,
-    color: 'bg-brand-gold/10 text-brand-gold'
+    icon: <Zap className="text-brand-gold" size={28} />,
+    title: "AI Match Engine",
+    description: "Our proprietary algorithm scores and matches your profile against thousands of verified opportunities."
+  },
+  {
+    icon: <Ship className="text-brand-gold" size={28} />,
+    title: "Export Hub",
+    description: "Full-stack support for logistics, customs, RICA compliance, and regional distribution logistics."
+  },
+  {
+    icon: <Building className="text-brand-gold" size={28} />,
+    title: "Corporate Strategy",
+    description: "Executive advisory for market entry, pricing strategy, and competitive positioning in Africa."
   }
 ];
 
 export const Services: React.FC = () => {
   return (
-    <section id="services" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-24 bg-white relative">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-brand-gold font-semibold tracking-widest uppercase text-sm mb-4">Our Expertise</h2>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-brand-navy mb-6">A Unified Platform for Pan-African Success</h3>
-          <p className="text-gray-600 text-lg">
-            We've merged market intelligence, deal execution, and high-level networking into
-            a single, exquisite infrastructure for your expansion.
+          <div className="inline-flex items-center gap-2 bg-brand-gold/10 border border-brand-gold/20 rounded-full px-4 py-1.5 mb-6">
+            <span className="text-[10px] font-bold text-brand-gold tracking-[2px] uppercase">Full Stack Solutions</span>
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl text-brand-navy font-bold mb-6 leading-tight">
+            Comprehensive infrastructure for <span className="text-brand-gold italic">African trade.</span>
+          </h2>
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed">
+            We provide the end-to-end framework necessary to convert market potential into verified revenue. No office setup, no overhead—just deals.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          {services.map((service, i) => (
             <motion.div
-              key={index}
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="p-8 rounded-2xl border border-gray-100 hover:border-brand-gold/20 hover:shadow-xl transition-all group"
+              transition={{ delay: i * 0.1 }}
+              className="group p-8 rounded-2xl border border-gray-100 hover:border-brand-gold/30 hover:shadow-xl transition-all duration-300"
             >
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 ${service.color}`}>
-                <service.icon size={28} />
+              <div className="w-14 h-14 rounded-xl bg-brand-gold/5 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-brand-gold/10 transition-transform duration-500">
+                {service.icon}
               </div>
-              <h4 className="text-xl font-bold text-brand-navy mb-4">{service.title}</h4>
-              <p className="text-gray-500 text-sm leading-relaxed">
+              <h3 className="text-xl font-bold text-brand-navy mb-4">{service.title}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">
                 {service.description}
               </p>
             </motion.div>
